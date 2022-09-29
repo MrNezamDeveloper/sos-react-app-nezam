@@ -10,8 +10,10 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 const ResponsiveAppBar: React.FC<{}> = () => {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
@@ -22,6 +24,14 @@ const ResponsiveAppBar: React.FC<{}> = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  const handleNavigation = (e: string) => {
+    setAnchorElNav(null);
+    if (e === "home") {
+      navigate("/");
+    } else {
+      navigate("/todo-list");
+    }
   };
 
   return (
@@ -41,10 +51,17 @@ const ResponsiveAppBar: React.FC<{}> = () => {
               color: "inherit",
               textDecoration: "none",
             }}
+            onClick={handleNavigation.bind(this, "home")}
           >
             لوگو
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              justifyContent: "flex-end",
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -71,13 +88,12 @@ const ResponsiveAppBar: React.FC<{}> = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
-                justifyContent: "flex-end",
               }}
             >
-              <MenuItem onClick={handleCloseNavMenu}>
+              <MenuItem onClick={handleNavigation.bind(this, "home")}>
                 <Typography textAlign="center">صفحه اصلی</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
+              <MenuItem onClick={handleNavigation.bind(this, "todo")}>
                 <Typography textAlign="center">تودو لیست</Typography>
               </MenuItem>
             </Menu>
@@ -97,6 +113,7 @@ const ResponsiveAppBar: React.FC<{}> = () => {
               textDecoration: "none",
               justifyContent: "flex-end",
             }}
+            onClick={handleNavigation.bind(this, "home")}
           >
             لوگو
           </Typography>
@@ -108,15 +125,16 @@ const ResponsiveAppBar: React.FC<{}> = () => {
             }}
           >
             <Button
-              onClick={handleCloseNavMenu}
+              onClick={handleNavigation.bind(this, "home")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               صفحه اصلی
             </Button>
             <Button
-              onClick={handleCloseNavMenu}
+              onClick={handleNavigation.bind(this, "todo")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
+              {" "}
               تودو لیست
             </Button>
           </Box>
