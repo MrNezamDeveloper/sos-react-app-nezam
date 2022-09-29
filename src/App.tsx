@@ -1,11 +1,12 @@
-import React from 'react';
-
-function App() {
+import React from "react";
+import ResponsiveAppBar from "./components/Header";
+const App: React.FC = () => {
   return (
-    <div >
-     
-    </div>
+    <>
+      <ResponsiveAppBar />
+      <p>helooooooooooo</p>
+    </>
   );
-}
+};
 
 export default App;
