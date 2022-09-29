@@ -3,7 +3,6 @@ import whale from "../assets/images/whale.webp";
 import styled, { CSSObject } from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Axios } from "axios";
 import { NewsList } from "../services/news";
 const dummyData = {
   id: Math.random(),
@@ -18,13 +17,11 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     NewsList().then((res) => {
-      console.log(res.data.results)
+      console.log(res.data.results);
       setData(res.data.results);
     });
   }, []);
-
   const navigate = useNavigate();
-
   return (
     <Container>
       <div className="titles">
@@ -32,8 +29,9 @@ const Home: React.FC = () => {
         <div>مفالها</div>
       </div>
       <div className="cards">
-        {data.map((data:any) => (
+        {data.map((data: any) => (
           <Card
+            key={data.id}
             image={dummyData.image}
             title={data.category.name}
             time={dummyData.time}
@@ -44,37 +42,6 @@ const Home: React.FC = () => {
             children={undefined}
           ></Card>
         ))}
-{/* 
-        <Card
-          image={dummyData.image}
-          title={dummyData.title}
-          time={dummyData.time}
-          description={dummyData.description}
-          onClick={() => {
-            navigate(`/articles/${dummyData.id}`);
-          }}
-          children={undefined}
-        ></Card>
-        <Card
-          image={dummyData.image}
-          title={dummyData.title}
-          time={dummyData.time}
-          description={dummyData.description}
-          onClick={() => {
-            navigate(`/articles/${dummyData.id}`);
-          }}
-          children={undefined}
-        ></Card>
-        <Card
-          image={dummyData.image}
-          title={dummyData.title}
-          time={dummyData.time}
-          description={dummyData.description}
-          onClick={() => {
-            navigate(`/articles/${dummyData.id}`);
-          }}
-          children={undefined}
-        ></Card> */}
       </div>
     </Container>
   );

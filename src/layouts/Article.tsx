@@ -1,59 +1,32 @@
-import Card from "../components/card";
-import whale from "../assets/images/whale.webp";
 import styled, { CSSObject } from "@emotion/styled";
-const dummyData = {
-  image: whale,
-  title: "راهنمای دریافت معرفی نامه",
-  time: "5",
-  description:
-    "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
-};
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { SingleNews } from "../services/singleNews";
 
 const Article: React.FC = () => {
-  return (
-    <Container>
-      <Card
-        image={dummyData.image}
-        title={dummyData.title}
-        time={dummyData.time}
-        description={dummyData.description}
-        onClick={() => {
-          console.log("id");
-        }}
-        children={undefined}
-      ></Card>
-      <Card
-        image={dummyData.image}
-        title={dummyData.title}
-        time={dummyData.time}
-        description={dummyData.description}
-        onClick={() => {
-          console.log("id");
-        }}
-        children={undefined}
-      ></Card>
-      <Card
-        image={dummyData.image}
-        title={dummyData.title}
-        time={dummyData.time}
-        description={dummyData.description}
-        onClick={() => {
-          console.log("id");
-        }}
-        children={undefined}
-      ></Card>
-      <Card
-        image={dummyData.image}
-        title={dummyData.title}
-        time={dummyData.time}
-        description={dummyData.description}
-        onClick={() => {
-          console.log("id");
-        }}
-        children={undefined}
-      ></Card>
-    </Container>
-  );
+  const { articleId } = useParams<string>();
+  const [data, setData] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    console.log(articleId);
+    setLoading(true);
+    articleId &&
+      SingleNews(articleId).then((data: any) => {
+        console.log(data.data.category.name);
+        setLoading(false);
+        setData(data.data);
+      });
+  }, [articleId]);
+
+  if (loading) {
+    return <p>loading...</p>;
+  } else {
+    return (
+      <Container>
+        <p></p>
+      </Container>
+    );
+  }
 };
 
 export default Article;
