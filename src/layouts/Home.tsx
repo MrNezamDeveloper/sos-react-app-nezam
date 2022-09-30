@@ -3,7 +3,7 @@ import whale from "../assets/images/whale.webp";
 import styled, { CSSObject } from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { NewsList } from "../services/news";
+import { getNewsList } from "../services/news";
 const dummyData = {
   id: Math.random(),
   image: whale,
@@ -14,14 +14,14 @@ const dummyData = {
 };
 const Home: React.FC = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    NewsList().then((res) => {
-      console.log(res.data.results);
+    getNewsList().then((res) => {
       setData(res.data.results);
     });
   }, []);
-  const navigate = useNavigate();
+
   return (
     <Container>
       <div className="titles">
@@ -34,7 +34,7 @@ const Home: React.FC = () => {
             key={data.id}
             image={dummyData.image}
             title={data.category.name}
-            time={dummyData.time}
+            time={`${Math.floor(Math.random() * 10 + 1)}`}
             description={data.description}
             onClick={() => {
               navigate(`/articles/${data.id}`);

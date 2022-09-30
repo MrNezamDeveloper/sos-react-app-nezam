@@ -1,29 +1,41 @@
 import styled, { CSSObject } from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SingleNews } from "../services/singleNews";
+import { ISingleNews } from "../models/singleNews";
+import { getSingleNews } from "../services/singleNews";
 
 const Article: React.FC = () => {
-  const { articleId } = useParams<string>();
-  const [data, setData] = useState<any>();
+  const [dataArticle, setDataArticle] = useState<ISingleNews>();
   const [loading, setLoading] = useState<boolean>(false);
+  const { articleId } = useParams<string>();
+
   useEffect(() => {
-    console.log(articleId);
     setLoading(true);
-    articleId &&
-      SingleNews(articleId).then((data: any) => {
-        console.log(data.data.category.name);
+    getSingleNews(articleId)
+      .then((data) => {
+        console.log(data.data)
+        setDataArticle(data.data);
         setLoading(false);
-        setData(data.data);
-      });
+      })
+      .finally(() => setLoading(false));
   }, [articleId]);
 
+
+  console.log(dataArticle)
   if (loading) {
-    return <p>loading...</p>;
-  } else {
+    console.log("lodanig:true");
     return (
       <Container>
-        <p></p>
+        <p>loading...</p>
+      </Container>
+    );
+  } else {
+    console.log("loading:false");
+    console.log(dataArticle)
+    return (
+      <Container>
+        <p>{dataArticle && dataArticle.title}</p>
+        <p>{dataArticle && dataArticle.category.name}</p>
       </Container>
     );
   }
