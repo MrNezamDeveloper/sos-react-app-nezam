@@ -20,7 +20,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <Container>
-      <img className="image" src={image} alt="" />
+      <img className="image" src={image} alt="iamge about this news" />
       <h3 className="title">{title}</h3>
       <div className="time">
         <p>دقیقه</p>
@@ -73,7 +73,7 @@ const Container = styled.div(
       textOverflow: "ellipsis",
       WebkitBoxOrient: "vertical",
       overflow: "hidden",
-      textAlign: "right",
+      direction: "rtl",
     },
     "&>.more-conainer": {
       display: "flex",

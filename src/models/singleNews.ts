@@ -11,4 +11,5 @@ export interface ISingleNews {
   id: string;
   title: string;
   user: IUser;
+  image: string;
 }

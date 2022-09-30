@@ -1,17 +1,9 @@
 import Card from "../components/card";
-import whale from "../assets/images/whale.webp";
 import styled, { CSSObject } from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getNewsList } from "../services/news";
-const dummyData = {
-  id: Math.random(),
-  image: whale,
-  title: "راهنمای دریافت معرفی نامه",
-  time: "5",
-  description:
-    "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
-};
+
 const Home: React.FC = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
@@ -26,13 +18,13 @@ const Home: React.FC = () => {
     <Container>
       <div className="titles">
         <div className="all-articles">نمایش همه</div>
-        <div>مفالها</div>
+        <div className="articles">مقاله ها</div>
       </div>
       <div className="cards">
         {data.map((data: any) => (
           <Card
             key={data.id}
-            image={dummyData.image}
+            image={data.image}
             title={data.category.name}
             time={`${Math.floor(Math.random() * 10 + 1)}`}
             description={data.description}
@@ -42,6 +34,9 @@ const Home: React.FC = () => {
             children={undefined}
           ></Card>
         ))}
+      </div>
+      <div className="btn">
+        <div>بیشتر</div>
       </div>
     </Container>
   );
@@ -57,11 +52,7 @@ const Container = styled.div(
       justifyContent: "space-between",
       flexWrap: "wrap",
     },
-    "@media (max-width:700px)": {
-      "&>.cards": {
-        justifyContent: "center",
-      },
-    },
+
     "&>.titles": {
       width: "100%",
       padding: "10px ",
@@ -69,6 +60,43 @@ const Container = styled.div(
       justifyContent: "space-between",
       "&>.all-articles": {
         cursor: "pointer",
+        color: "blue",
+      },
+      "&>.articles": {
+        fontWeight: "bold",
+      },
+    },
+    "&>.btn": {
+      width: "100%",
+      display: "none",
+      alignItems: "center",
+      justifyContent: "center",
+      "&>div": {
+        padding: "7px 40px",
+        textAlign: "center",
+        borderRadius: "5px",
+        border: "1px solid blue",
+        color: "blue",
+        cursor: "pointer",
+      },
+    },
+    "@media (max-width:1000px)": {
+      "&>.cards": {
+        justifyContent: "space-evenly",
+      },
+    },
+    "@media (max-width:700px)": {
+      "&>.cards": {
+        justifyContent: "center",
+      },
+      "&>.titles": {
+        justifyContent: "flex-end",
+      },
+      "&>.titles>.all-articles": {
+        display: "none",
+      },
+      "&>.btn": {
+        display: "flex",
       },
     },
   }),
