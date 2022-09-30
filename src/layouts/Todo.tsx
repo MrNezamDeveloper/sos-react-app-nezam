@@ -1,7 +1,11 @@
+import Form from "../components/todo-list/Form";
+import "./home.css"
 const TodoList: React.FC = () => {
-  return <div>
-    <h1>todo list</h1>
-  </div>;
+  return (
+    <div className="wrapper">
+      <Form />
+    </div>
+  );
 };
 
 export default TodoList;

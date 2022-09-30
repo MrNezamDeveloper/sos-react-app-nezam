@@ -1,8 +1,8 @@
-import styled, { CSSObject } from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ISingleNews } from "../models/singleNews";
 import { getSingleNews } from "../services/singleNews";
+import { Container } from "./article.style";
 
 const Article: React.FC = () => {
   const [dataArticle, setDataArticle] = useState<ISingleNews>();
@@ -13,24 +13,19 @@ const Article: React.FC = () => {
     setLoading(true);
     getSingleNews(articleId)
       .then((data) => {
-        console.log(data.data);
         setDataArticle(data.data);
         setLoading(false);
       })
       .finally(() => setLoading(false));
   }, [articleId]);
 
-  console.log(dataArticle);
   if (loading) {
-    console.log("lodanig:true");
     return (
       <Container>
         <p>loading...</p>
       </Container>
     );
   } else {
-    console.log("loading:false");
-    console.log(dataArticle);
     return (
       <Container>
         <div className="img">
@@ -52,63 +47,3 @@ const Article: React.FC = () => {
 };
 
 export default Article;
-
-const Container = styled.div(
-  (): CSSObject => ({
-    display: "flex",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    borderRadius: "10px",
-    padding: "10px",
-    border: "1px solid blue",
-    width: "90%",
-    margin: "20px auto",
-
-    "&>.img": {
-      width: "48%",
-      "&>img": {
-        width: "100%",
-        borderRadius: "10px",
-        objectFit: "cover",
-        objectPosition: "center",
-      },
-    },
-    "&>.text": {
-      width: "48%",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "start",
-      alignItems: "end",
-      "&>.title": {
-        textAlign: "right",
-        fontSize: "18px",
-        fontWeight: "bold",
-      },
-      "&>.description": {
-        textAlign: "right",
-        marginTop: "50px",
-      },
-      "&>.footer": {
-        display: "flex",
-        width: "100%",
-        alignItems: "center",
-        marginTop: "50px",
-        justifyContent: "space-between",
-      },
-    },
-    "@media (max-width:800px)": {
-      flexDirection: "column",
-      "&>.img": {
-        width: "100%",
-      },
-      "&>.text": {
-        width: "100%",
-      },
-    },
-    "@media (max-width:500px)": {
-      "&>.text>.description": {
-        marginTop: "10px",
-      },
-    },
-  }),
-);
