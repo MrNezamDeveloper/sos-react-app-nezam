@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import TodoCreator from "./FormInput";
 import TodoList from "./List";
-import { createTheme } from "@mui/material/styles";
 
-const theme = createTheme({
-  palette: {
-    primary: { main: "#000000" },
-  },
-});
+
+export interface ITodos {
+  text?: string;
+  isCompleted?: boolean;
+  isEditing?: boolean;
+}
 
 const Form: React.FC = () => {
-  const [newTodo, setNewTodo] = useState("");
-  const [todos, setTodos] = useState<any>([
+  const [newTodo, setNewTodo] = useState<string>("");
+  const [todos, setTodos] = useState<ITodos[]>([
     {
       text: "Learn about React",
       isCompleted: false,
@@ -32,14 +32,14 @@ const Form: React.FC = () => {
   const noteRef = useRef<any>({});
   const [isInputEmpty, setInputEmpty] = useState(false);
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     addTodo(newTodo);
     clearInput();
     inputRef.current.focus();
   };
 
-  const preventSubmit = (e: { key: string; preventDefault: () => void; }) => {
+  const preventSubmit = (e: { key: string; preventDefault: () => void }) => {
     if (e.key === "Enter") {
       e.preventDefault();
     }
@@ -95,7 +95,6 @@ const Form: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="form">
       <TodoCreator
-        theme={theme}
         todo={newTodo}
         setTodo={setTodo}
         clearInput={clearInput}
@@ -105,7 +104,6 @@ const Form: React.FC = () => {
       />
 
       <TodoList
-        theme={theme}
         todos={todos}
         completeTodo={completeTodo}
         editTodo={editTodo}

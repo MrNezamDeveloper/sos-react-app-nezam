@@ -46,7 +46,6 @@ const ResponsiveAppBar: React.FC<{}> = () => {
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -98,16 +97,14 @@ const ResponsiveAppBar: React.FC<{}> = () => {
             </Menu>
           </Box>
           <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
+           variant="h6"
+           noWrap
+           component="a"
             sx={{
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
               justifyContent: "flex-end",
