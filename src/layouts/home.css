@@ -1,49 +1,65 @@
-
 ul {
-    list-style: none;
-    width: 400px;
-  }
-  
-  .wrapper {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 50px auto 0;
-    flex-direction: column;
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-  }
-  
+  list-style: none;
+  width: 400px;
+}
+
+.wrapper {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto 0;
+  flex-direction: column;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.form {
+  width: 400px;
+}
+
+.form__input {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px dashed gray;
+  padding-bottom: 10px;
+  height: 67px;
+}
+
+.form__edit-input {
+  outline: none;
+  border: none;
+  font-size: 20px;
+  width: 90%;
+  background-color: rgba(128, 128, 128, 0.228);
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.delete-icon > path {
+  fill: red;
+}
+.save-icon > path {
+  fill: green;
+}
+@media screen and (max-width: 500px) {
   .form {
-    width: 400px;
+    width: auto;
   }
-  
-  .form__input {
-    display: flex;
-    width: 100%;
-    border-bottom: 1px dashed gray;
-    padding-bottom: 10px;
-    height: 67px;
+  ul {
+    width: auto;
   }
-  
-  .form__edit-input {
-    outline: none;
-    border: none;
-    font-size: 20px;
-    width: 90%;
-  }
-  
-  .visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-  
+}

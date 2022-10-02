@@ -82,7 +82,7 @@ const TodoList: React.FC<ITodoList> = ({
                     aria-label="edit"
                     onClick={() => editTodo(inx)}
                   >
-                    <EditIcon />
+                    <EditIcon className="edite-icon" />
                   </IconButton>
                 </ListItemIcon>
               </>
@@ -107,7 +107,7 @@ const TodoList: React.FC<ITodoList> = ({
                     edge="end"
                     aria-label="delete"
                   >
-                    <BookmarkIcon />
+                    <BookmarkIcon  className="save-icon"/>
                   </IconButton>
                 </ListItemIcon>
               </>
@@ -118,7 +118,7 @@ const TodoList: React.FC<ITodoList> = ({
                 edge="end"
                 aria-label="delete"
               >
-                <DeleteIcon />
+                <DeleteIcon className="delete-icon"/>
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
